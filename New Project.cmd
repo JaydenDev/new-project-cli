@@ -1,4 +1,5 @@
 @echo off
+set %projdir%="C:\Users\%username%\Documents\Projects"
 
 echo Select the editor you wish to use 
 echo -------------------------
@@ -11,7 +12,6 @@ Set /P editr=Selection #
 
 If %editr%==1 set editor=code
 If %editr%==2 set editor=notepad++
-If %editr$==3 set editor=notepad
 If %editr$==4 set editor=subl
 
 echo Select a language/framework
@@ -40,5 +40,9 @@ If %lang%==site (
 	mkdir "C:\Users\%username%\Documents\Projects\%name%\input"
 	mkdir "C:\Users\%username%\Documents\Projects\%name%\output"
 )
-%editor% "C:\Users\%username%\Documents\Projects\%name%\"
+
+if %editor%==code code %projdir%\%name%
+if %editor%==notepad++ notepad++ %projdir%\%name%\
+if %editor%==subl subl %projdir%\%name%\
+
 pause
