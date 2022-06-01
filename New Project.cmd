@@ -1,5 +1,5 @@
 @echo off
-set %projdir%="C:\Users\%username%\Documents\Projects"
+set %projdir%=C:\Users\%username%\Documents\Projects
 
 echo What method would you like to use?
 echo ------------------------
@@ -14,8 +14,12 @@ If %method%==3 GOTO DELE
 
 :DELE
 Set /P name="Name of project to delete" 
-del "C:\Users\%username%\Documents\Projects\%name%\*
-del "C:\Users\%username%\Documents\Projects\%name%
+If exist "C:\Users\%username%\Documents\Projects\%name%" (
+	del "C:\Users\%username%\Documents\Projects\%name%\*
+	del "C:\Users\%username%\Documents\Projects\%name%
+) else (	
+	exit
+)
 exit
 
 :W
