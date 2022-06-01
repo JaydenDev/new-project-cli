@@ -1,5 +1,19 @@
 @echo off
 
+echo Select the editor you wish to use 
+echo -------------------------
+echo 1 - Visual Studio Code
+echo 2 - Notepad++
+echo 3 - Notepad
+echo 4 - Sublime Text
+echo -------------------------
+Set /P editr=Selection #
+
+If %editr%==1 set editor=code
+If %editr%==2 set editor=notepad++
+If %editr$==3 set editor=notepad
+If %editr$==4 set editor=subl
+
 echo Select a language/framework
 Echo -------------------------
 Echo 1 - Python
@@ -26,4 +40,5 @@ If %lang%==site (
 	mkdir "C:\Users\%username%\Documents\Projects\%name%\input"
 	mkdir "C:\Users\%username%\Documents\Projects\%name%\output"
 )
+%editor% "C:\Users\%username%\Documents\Projects\%name%\"
 pause
