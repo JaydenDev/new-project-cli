@@ -1,6 +1,30 @@
 @echo off
 set %projdir%="C:\Users\%username%\Documents\Projects"
 
+echo What method would you like to use?
+echo ------------------------
+echo 1 - Clone an existing repository
+echo 2 - New project
+echo 3 - Remove project from computer
+echo ------------------------
+Set /P method=Selection #
+
+If %method%==1 GOTO W
+If %method%==3 GOTO DELE
+
+:DELE
+Set /P name="Name of project to delete" 
+del "C:\Users\%username%\Documents\Projects\%name%\*
+del "C:\Users\%username%\Documents\Projects\%name%
+exit
+
+:W
+Set /P name="Folder Name "
+Set /P repo="Repository URL "
+git clone %repo% "C:\Users\%username%\Documents\Projects\%name%”
+GOTO EDITOR
+
+:EDITOR
 echo Select the editor you wish to use 
 echo -------------------------
 echo 1 - Visual Studio Code
@@ -13,6 +37,7 @@ Set /P editr=Selection #
 If %editr%==1 set editor=code
 If %editr%==2 set editor=notepad++
 If %editr$==4 set editor=subl
+If %method%==1 GOTO OPEN
 
 echo Select a language/framework
 Echo -------------------------
@@ -56,6 +81,7 @@ if %lang%==basicthemedsite (
 	git init "C:\Users\%username%\Documents\Projects\%name%\"
 )
 
+:OPEN
 if %editor%==code code %projdir%\%name%
 if %editor%==notepad++ notepad++ %projdir%\%name%\
 if %editor%==subl subl %projdir%\%name%\
